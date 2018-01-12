@@ -7,12 +7,14 @@
 //
 //
 //  Reviewed by:
-//      - No one yet.
+//      - Lantare
+//      - Nobody else.
 //
 //  Function prototypes will not be added in a different header file to make it easier,
 //  but you should use headers in practice.
 
 #include <iostream>
+#include <cstdlib>
 #define NUMBEROFELEMENTS(x)  (int)(sizeof (x) / sizeof (x[0])) //used to check how many elements are in an array for example
 
 using namespace std;
@@ -27,6 +29,9 @@ int Multiplication(int a, int b);
 int Division(int a, int b);
 int rdm();
 int rdmBounds(int min, int max);
+
+string Reverse(string str);
+bool logicGates(bool x, bool y);
 
 int main()
 {
@@ -55,7 +60,7 @@ int main()
     // create a new string array called "shoppingList", with three elements of your choice. Create an int variable containing the number of
     // elements in "shoppingList" (using a function of the array/using the array)
     string shoppingList[3] = {"milk", "a Chevy Camaro", "a life"};
-    int nbOfElemets = numberOfElements(shoppingList);
+    int nbOfElements = NUMBEROFELEMENTS(shoppingList);
 
     // FIXME: For-loop - Integer
     // Create a simple for-loop for an integer "i" going from 1 to 10 that print the value of "i"
@@ -64,7 +69,7 @@ int main()
 
     // FIXME: For-loop - shoppingList
     // Create a for loop that iterate through "shoppingList" and prints each element.
-    for (int j = 0; j < nbOfElemets; j++)
+    for (int j = 0; j < nbOfElements; j++)
         cout << shoppingList[j] << endl;
 
     // FIXME: Foreach-loop
@@ -86,7 +91,7 @@ int main()
     // "element". If yes, print "You have to buy (value of element) !", and stop the loop (search how to stop a loop).
     // If not, print "Nope, you don't need (value of "element")".
     string element = "a life";
-    for (int i = 0; i < nbOfElemets; i++)
+    for (int i = 0; i < nbOfElements; i++)
     {
         if (element == shoppingList[i])
         {
@@ -167,18 +172,48 @@ int main()
     // {x7,x8,x9,}
     int multiArray[3][3];
 
-    for (int i = 0; i < numberOfElements(multiArray); i++)
-        for (int j = 0; j < numberOfElements(multiArray[i]); j++)
+    for (int i = 0; i < NUMBEROFELEMENTS(multiArray); i++)
+        for (int j = 0; j < NUMBEROFELEMENTS(multiArray[i]); j++)
             multiArray[i][j] = rdmBounds(0, 10);
 
 
-    for (int i = 0; i < numberOfElements(multiArray); i++)
+    for (int i = 0; i < NUMBEROFELEMENTS(multiArray); i++)
     {
         cout << "{";
-        for (int j = 0; j < numberOfElements(multiArray[i]); j++)
+        for (int j = 0; j < NUMBEROFELEMENTS(multiArray[i]); j++)
             cout << multiArray[i][j] << ", ";
         cout << "}\n";
     }
+
+    //FIXME: Switch
+    //Create a Switch that takes an integer "a" and return a sentence regarding the value of a
+    //(Create 3 statements for 3 specific values and a default one)
+    int a;
+    cin >> a;
+    switch(a){
+    case 1:
+        cout << "Num: 1\n";
+        break;
+    case 2:
+        cout << "Num: 2\n";
+        break;
+    case 3:
+        cout << "Num: 3\n";
+        break;
+    default:
+        cout << "Number: " << a << endl;
+        break;
+    }
+
+    //FIXME: logic Gates
+    //Create 7 functions for each logic gates (And, Or, No, Nand, Nor).
+    //Each function takes two booleans as parameters and returns the result of the logic gate.
+    //(or You can do it with a switch and only one function)
+    cout << "Logic gate: " << logicGates(true, false) << endl;
+
+    //FIXME - Reverse
+    //Create a function that reverse a string
+    cout << Reverse("Hello Friend.") << endl;
 
     return 0;
 
@@ -230,4 +265,56 @@ int rdm()
 int rdmBounds(int min, int max)
 {
     return min + (rand() % (max - min));
+}
+
+string Reverse(string str){
+    string temp="";
+    for(int i = str.length()-1; i >= 0; i--)
+        temp += str[i];
+    return temp;
+}
+
+bool logicGates(bool x, bool y){
+    //And, Or, No, Nand, Nor,
+    int i;
+    cout << "Choose num: \n"
+         << "0 - AND\n" << "1 - OR\n" << "2 - NO\n" << "3 - NAND\n"
+         << "4 - NOR\n";
+    cin >> i;
+
+    switch(i){
+    case 0://and
+        if(x && y)
+            return true;
+        else
+            return false;
+        break;
+    case 1://or
+        if (x || y)
+            return true;
+        else
+            return false;
+        break;
+    case 2://no
+        if (x)
+            return false;
+        else
+            return true;
+        break;
+    case 3://nand
+        if(x && y)
+            return false;
+        else
+            return true;
+        break;
+    case 4://nor
+        if (x || y)
+            return false;
+        else
+            return true;
+        break;
+    default:
+        cout << "Wrong Value\n";
+        break;
+    }
 }

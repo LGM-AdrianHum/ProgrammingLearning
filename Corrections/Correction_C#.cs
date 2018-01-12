@@ -7,8 +7,8 @@
 //
 //  Reviewed by:
 //      - Nementon
+//      - Adrian Hum (lgm-adrianhum)
 //      - (null)
-//		- Adrian Hum (lgm-adrianhum)
 //
 
 using System;
@@ -47,7 +47,7 @@ namespace CSharpCorrection
             sb.Append("Hello");
             sb.Append(name);
             Console.WriteLine(sb.ToString());
-            
+
             // FIXME: Array
             // create a new string array called "shoppingList", with three elements of your choice. Create an int variable containing the number of
             // elements in "shoppingList" (using a function of the array/using the array)
@@ -75,7 +75,7 @@ namespace CSharpCorrection
                 Console.WriteLine(elt);
             }
 
-             
+
 
             // FIXME: If-statement
             // Modify the first for-loop (with i from 1 to 10) such that it prints "(value of i) is even" when "i" is divisible
@@ -91,7 +91,7 @@ namespace CSharpCorrection
                     Console.WriteLine("{0} is odd", i);
                 }
             }
-            
+
             // FIXME: If-statement
             // Modify the first for-loop (with i from 1 to 10) such that it prints "(value of i) is even" when "i" is divisible
             // by 2 (You may want to learn more about "modulo" (%)). Else, print "(value of i) is odd".
@@ -286,13 +286,49 @@ TRIFORCE"
         /// You are given the height of the staircase.
         /// </summary>
         /// <param name="MaxValue">The Number of steps that you want...</param>
-         static void PrintStaircase(int MaxValue)
+        static void PrintStaircase(int MaxValue)
         {
             var l = new String('#', MaxValue); // Gives a string of '#' the length of the longest staircase.
             for(int i=1; i<=MaxValue; i++)
             {
                 Console.WriteLine(l.Substring(0, i).PadLeft(MaxValue)); //Right align the result using spaces.
             }
+        }
+        
+        /// <summary>
+        /// Create a function that reverse a string
+        /// LGM: 26-November-2015
+        /// </summary>
+        /// <param name="text">string you want to reverse...</param>
+        static string Reverse(string text)
+        {
+            if (string.IsNullOrEmpty(text)) return null;
+            
+            var array = text.ToCharArray();
+            Array.Reverse(array);
+            return new string(array);
+        }
+        
+        /// <summary>
+        /// Create a function that reverse a string
+        /// There is a second approach that can be faster for certain string lengths which uses Xor. 
+        /// LGM: 26-November-2015
+        /// </summary>
+        /// <param name="text">string you want to reverse...</param>
+        static string ReverseXor(string text)
+        {
+            if (string.IsNullOrEmpty(text)) return null;
+            var charArray = text.ToCharArray();
+            var len = s.Length - 1;
+
+            for (int i = 0; i < len; i++, len--)
+            {
+                charArray[i] ^= charArray[len];
+                charArray[len] ^= charArray[i];
+                charArray[i] ^= charArray[len];
+            }
+
+            return new string(charArray);
         }
     }
 }
